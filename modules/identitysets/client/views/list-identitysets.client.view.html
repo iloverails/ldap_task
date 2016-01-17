@@ -1,0 +1,49 @@
+<section ng-controller="IdentitysetsController" ng-init="find()">
+    <div class="page-header">
+        <h1>Identity Sets
+            <div class="pull-right">
+                <a class="btn btn-primary" ui-sref="identitysets.create">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </a>
+            </div>
+        </h1>
+    </div>
+    <div>
+        <table st-table="displayedsets" st-safe-src="identitysets" class="table table-striped">
+            <thead>
+            <tr ng-hide="!identitysets.$resolved || identitysets.length < 10">
+                <th colspan="4">
+                    <input st-search placeholder="Search Identity Sets" class="input-sm form-control" type="search"/>
+                </th>
+            </tr>
+            <tr>
+                <th st-ratio="20" st-sort="name">Name</th>
+                <th st-ratio="20" st-sort="description">Description</th>
+                <th st-ratio="20" st-sort="setType">Type</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="identityset in displayedsets">
+                <td st-ratio="20"><a ng-href="#!/identitysets/{{identityset._id}}">{{identityset.name}}</a></td>
+                <td st-ratio="20">{{identityset.description}}</td>
+                <td st-ratio="20">{{identityset.setType}}</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5" class="text-center">
+                    <div st-pagination="" st-items-by-page="itemsPerPage" st-template="directives/smart-table/pagination.html"></div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="alert alert-warning text-center" ng-if="identitysets.$resolved && identitysets.length < 3">
+    	An Identity sets contains a set of Identities that can be provisioned as accounts in target systems ("User" type Identity Set),
+        or external users who don't require any accounts ("Contact" type Identity sets). You might choose to have multiple "User" sets,
+        for example, to separate "Staff" from "Contractors" to make it easy to restrict the access of Contractors.
+    </div>
+    <div class="alert alert-warning text-center" ng-if="identitysets.$resolved && !identitysets.length">
+        No Identity Sets yet, why don't you <a ui-sref="identitysets.create">create one</a>?
+    </div>
+  </section>

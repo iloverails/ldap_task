@@ -1,0 +1,36 @@
+<section ng-controller="IdentitysetsController">
+    <div class="page-header">
+        <h1>New Identity Set</h1>
+    </div>
+    <div class="col-md-12">
+        <form name="identitysetForm" class="form-horizontal" ng-submit="create(identitysetForm.$valid)"  role="form" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input type="text" ng-model="name" id="name" class="form-control" placeholder="Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="setType">Identity Set Type</label>
+                    <div class="controls">
+                        <select ng-required="true" ng-options="opt as opt.label for opt in setTypeOptions" name="setType" ng-model="setType" id="setType" class="form-control" placeholder="Identity Set type">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="description">Description</label>
+                    <div class="controls">
+                        <textarea name="description" ng-model="description" id="description" class="form-control" cols="30" rows="3" placeholder="Description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+				<div ng-show="error" class="text-danger">
+					<strong ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>
